@@ -1,8 +1,10 @@
 print('-------Importing packages and environment-------')
 import os
 import numpy as np 
+import sys
 import matplotlib.pyplot as plt
 import time
+sys.path.append('..')
 import make_env
 
 print('-------Getting team names-------')
