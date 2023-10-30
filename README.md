@@ -1,0 +1,1 @@
+This repo contains the files to automatically detect package version discrepancies in students' submissions. Make sure to update the `requirements.txt` file so that it is consistent with the versions on Google Colab.
