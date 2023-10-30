@@ -49,13 +49,13 @@ for t in range(0, T):
     # if newplot:
     #   display.clear_output(wait=True)
     #   display.display(plt.gcf())
-    print('last customer covariate: ', last_customer_covariates)
-    print('last (item bought, agent bought from, prices): ', sale)
-    print('current_profit per agent: ', profits)
+    # print('last customer covariate: ', last_customer_covariates)
+    # print('last (item bought, agent bought from, prices): ', sale)
+    # print('current_profit per agent: ', profits)
     last_customer_covariates = customer_covariates
 # plt.close()
-print("Cumulative buyer utility: {}".format(env.cumulative_buyer_utility))
-print("Average per-customer runtime agent 0 in seconds: {}".format(cumulativetimes[0]/T))
-print("Average per-customer runtime agent 1 in seconds: {}".format(cumulativetimes[1]/T))
+# print("Cumulative buyer utility: {}".format(env.cumulative_buyer_utility))
+# print("Average per-customer runtime agent 0 in seconds: {}".format(cumulativetimes[0]/T))
+# print("Average per-customer runtime agent 1 in seconds: {}".format(cumulativetimes[1]/T))
 
-print("Hello World!")
+print("Your Submission has passed!")
