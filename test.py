@@ -11,7 +11,10 @@ print('-------Getting team names-------')
 folders = [f for f in os.listdir('./agents') if not os.path.isfile(os.path.join('./agents', f))]
 folders = [f for f in folders if '_' not in f]
 assert len(folders) == 1, "There should be only one folder in the agents directory, or that your team name contains an underscore."
+assert folders[0] != 'yourteamname', "You should change the name of the folder to your actual team name."
+files = [f for f in os.listdir('./agents')]
 team_name = folders[0]
+assert f"{team_name}.py" is in files, "You should have an agent file in the /agents folder with your team's actual name" 
 print('Team name: {}, running test script'.format(team_name))
 
 
