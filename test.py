@@ -5,18 +5,21 @@ import sys
 import matplotlib.pyplot as plt
 import time
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-print(os.path.dirname(__file__))
 import make_env
 
 print('-------Getting team names-------')
+current_script_path = os.path.abspath(__file__)
+team_name = os.path.dirname(current_script_path)
+print('Your team name according to the repository name should be: ', team_name)
+
+print('-------Checking if file structure is correct-------')
 folders = [f for f in os.listdir('./agents') if not os.path.isfile(os.path.join('./agents', f))]
 folders = [f for f in folders if '_' not in f]
-assert len(folders) == 1, "There should be only one folder in the agents directory, or that your team name contains an underscore."
-assert folders[0] != 'yourteamname', "You should change the name of the folder to your actual team name."
+assert len(folders) == 1, "There should be only one folder in the agents directory, or that your team folder's name contains an underscore."
+assert folders[0] == team_name, "You should change the name of the folder to your actual team name."
 files = [f for f in os.listdir('./agents')]
-team_name = folders[0]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
-print('Team name: {}, running test script'.format(team_name))
+print('Team name: {}, file structure correct, running test script'.format(team_name))
 
 
 print('-------Testing agent-------')
