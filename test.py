@@ -5,6 +5,7 @@ import sys
 import matplotlib.pyplot as plt
 import time
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+print(os.path.dirname(__file__))
 import make_env
 
 print('-------Getting team names-------')
