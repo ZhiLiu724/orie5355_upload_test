@@ -30,8 +30,8 @@ else:
 print('Successfully initialized environment and agents.')
 
 
-print('-------Testing agent by running 20 steps against dummy adaptive agent-------')
-T = 20
+print('-------Testing agent by running 200 steps against dummy adaptive agent-------')
+T = 200
 env.reset()
 customer_covariates, sale, profits = env.get_current_state_customer_to_send_agents()
 last_customer_covariates = customer_covariates
