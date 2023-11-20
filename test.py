@@ -11,8 +11,8 @@ print('-------Getting team names-------')
 current_script_path = os.path.abspath(__file__)
 repo_name = os.path.basename(os.path.dirname(os.path.dirname(current_script_path)))
 part_and_team_name = repo_name.split('part-')[1]
-part_name = part_and_team_name.split('-')[0]
-team_name = part_and_team_name.split('-')[1]
+part_name = part_and_team_name.split('-', 1)[0]
+team_name = part_and_team_name.split('-', 1)[1]
 print('Your team name according to the repository name should be: ', team_name)
 print('This is submission for project part: ', part_name)
 
