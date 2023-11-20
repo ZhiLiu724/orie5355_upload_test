@@ -9,7 +9,7 @@ import make_env
 
 print('-------Getting team names-------')
 current_script_path = os.path.abspath(__file__)
-team_name = os.path.basename(os.path.dirname(os.path.dirname(current_script_path)))
+repo_name = os.path.basename(os.path.dirname(os.path.dirname(current_script_path)))
 print('Your team name according to the repository name should be: ', team_name)
 
 print('-------Checking if file structure is correct-------')
