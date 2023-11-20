@@ -20,7 +20,9 @@ print('-------Checking if file structure is correct-------')
 folders = [f for f in os.listdir('./agents') if not os.path.isfile(os.path.join('./agents', f))]
 folders = [f for f in folders if '_' not in f]
 assert len(folders) == 1, "There should be only one folder in the agents directory, or that your team folder's name contains an underscore."
-assert folders[0] == team_name, "You should change the name of the folder to your actual team name."
+assert folders[0].lower() == team_name.lower(), "You should change the name of the folder to your actual team name."
+if folders[0] != team_name:
+    team_name = folders[0]
 files = [f for f in os.listdir('./agents')]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
 print('Team name: {}, file structure correct, running test script'.format(team_name))
