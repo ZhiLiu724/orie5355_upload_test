@@ -11,7 +11,7 @@ print('-------Getting team names-------')
 current_script_path = os.path.abspath(__file__)
 repo_name = os.path.basename(os.path.dirname(os.path.dirname(current_script_path)))
 part_and_team_name = repo_name.split('part-')[1]
-part_name = part_and_team_name.split('-', 1)[0]
+part_name = part_and_team_name.split('-', 1)[0].astype('int')
 team_name = part_and_team_name.split('-', 1)[1]
 print('Your team name according to the repository name should be: ', team_name)
 print('This is submission for project part: ', part_name)
@@ -27,7 +27,7 @@ print('Team name: {}, file structure correct, running test script'.format(team_n
 
 
 print('-------Testing agent-------')
-project_part = 1 # have not build in the switch here
+project_part = part_name 
 agentnames = [team_name, 'dummy_fixed_prices_adaptive']
 if project_part == 1:
     env, agents = make_env.make_env_agents(agentnames = agentnames, project_part = project_part)
