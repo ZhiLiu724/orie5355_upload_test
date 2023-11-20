@@ -7,6 +7,9 @@ The test proceeds by importing all the relevant packages, initializing a `gym` e
 ## Setting up the autograder
 
 To set up an autograder that tests students' submissions, use the following setup command
+
 `sudo git clone https://github.com/ZhiLiu724/orie5355_upload_test.git upload_test; sudo -H pip3 install -r upload_test/requirements.txt`
+
 and the following run command
+
 `python upload_test/test.py`
