@@ -47,8 +47,8 @@ env.reset()
 customer_covariates, sale, profits = env.get_current_state_customer_to_send_agents()
 last_customer_covariates = customer_covariates
 cumulativetimes = [0 for _ in agents]
+n_errors = [0 for _ in agents]
 
-# fig, ax = plt.subplots(figsize=(20, 10))
 for t in range(0, T):
     actions = []
     for enoutside, agent in enumerate(agents):
@@ -56,20 +56,14 @@ for t in range(0, T):
       action = agent.action((customer_covariates, sale, profits))
       assert len(action) == project_part ## Have to give 1 price for each item. There is 1 item in part 1, 2 items in part 2
       curtime = time.time()
+      if np.any(np.array(action) < 0):
+          n_errors[enoutside] += 1
       cumulativetimes[enoutside] += curtime - ts
       actions.append(action)
     customer_covariates, sale, profits = env.step(actions)
-    # newplot = env.render(True)
-    # if newplot:
-    #   display.clear_output(wait=True)
-    #   display.display(plt.gcf())
-    # print('last customer covariate: ', last_customer_covariates)
-    # print('last (item bought, agent bought from, prices): ', sale)
-    # print('current_profit per agent: ', profits)
     last_customer_covariates = customer_covariates
-# plt.close()
-# print("Cumulative buyer utility: {}".format(env.cumulative_buyer_utility))
-# print("Average per-customer runtime agent 0 in seconds: {}".format(cumulativetimes[0]/T))
-# print("Average per-customer runtime agent 1 in seconds: {}".format(cumulativetimes[1]/T))
+
 
 print("Your Submission has passed!")
+print("Average per-customer runtime for your agent in seconds: {}".format(cumulativetimes[0]/T))
+print("Number of rounds your agent output invalid prives: {}".format(n_errors[0]))
