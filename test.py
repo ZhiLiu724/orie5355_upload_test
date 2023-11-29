@@ -66,4 +66,4 @@ for t in range(0, T):
 
 print("Your Submission has passed!")
 print("Average per-customer runtime for your agent in seconds: {}".format(cumulativetimes[0]/T))
-print("Number of rounds your agent output invalid prives: {}".format(n_errors[0]))
+print("Number of rounds your agent output invalid prices: {}".format(n_errors[0]))
