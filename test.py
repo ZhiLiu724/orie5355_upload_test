@@ -30,14 +30,10 @@ assert f"{team_name}.py" in files, "You should have an agent file in the /agents
 
 if part_name == 2:
     part2pricesfilename = 'part2_static_prices_submission.csv'
-    if f'{part2pricesfilename}' in files:
-        static_prices_df = pd.read_csv(f'./agents/{part2pricesfilename}')
-        if set(static_prices_df.columns) == set(['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']):
-            print('Your static prices file is submitted and the columns are correct')
-        else:
-            print('!!!Your submitted static prices file has wrong columns!!!')
-    else:
-        print('!!!You have not submitted the static prices file!!!')
+    assert f'{part2pricesfilename}' in files, "You have not submitted the static prices file"
+    static_prices_df = pd.read_csv(f'./agents/{part2pricesfilename}')
+    assert set(static_prices_df.columns) == set(['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']), "Your submitted static prices file has wrong columns"
+    print('Your static prices file is submitted and the columns are correct')
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
 
