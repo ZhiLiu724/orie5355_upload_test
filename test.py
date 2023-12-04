@@ -36,7 +36,7 @@ if part_name == 2:
         else:
             print('!!!Your submitted static prices file has wrong columns!!!')
     else:
-        print('!!!You have not submitted the static prices file!!!)
+        print('!!!You have not submitted the static prices file!!!')
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
 
