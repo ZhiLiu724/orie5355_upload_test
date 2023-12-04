@@ -1,6 +1,7 @@
 print('-------Importing packages and environment-------')
 import os
 import numpy as np 
+import pandas as pd
 import sys
 import matplotlib.pyplot as plt
 import time
