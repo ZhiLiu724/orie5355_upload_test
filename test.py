@@ -32,7 +32,7 @@ if part_name == 2:
     part2pricesfilename = 'part2_static_prices_submission.csv'
     if f'{part2pricesfilename}' in files:
         static_prices_df = pd.read_csv(f'./agents/{part2pricesfilename}')
-        if static_prices_df.columns == ['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']:
+        if set(static_prices_df.columns) == set(['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']):
             print('Your static prices file is submitted and the columns are correct')
         else:
             print('!!!Your submitted static prices file has wrong columns!!!')
