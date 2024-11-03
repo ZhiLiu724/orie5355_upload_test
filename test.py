@@ -28,50 +28,47 @@ if folders[0] != team_name:
 files = [f for f in os.listdir('./agents')]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
 
-if part_name == 2:
-    part2pricesfilename = 'part2_static_prices_submission.csv'
-    assert f'{part2pricesfilename}' in files, "You have not submitted the static prices file"
-    static_prices_df = pd.read_csv(f'./agents/{part2pricesfilename}')
-    assert set(static_prices_df.columns) == set(['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']), "Your submitted static prices file has wrong columns"
-    print('Your static prices file is submitted and the columns are correct')
+# if part_name == 2:
+#     part2pricesfilename = 'part2_static_prices_submission.csv'
+#     assert f'{part2pricesfilename}' in files, "You have not submitted the static prices file"
+#     static_prices_df = pd.read_csv(f'./agents/{part2pricesfilename}')
+#     assert set(static_prices_df.columns) == set(['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']), "Your submitted static prices file has wrong columns"
+#     print('Your static prices file is submitted and the columns are correct')
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
 
 
 print('-------Testing agent-------')
 project_part = part_name 
-agentnames = [team_name, 'dummy_fixed_prices_adaptive']
 if project_part == 1:
-    env, agents = make_env.make_env_agents(agentnames = agentnames, project_part = project_part)
-    
+    agentnames = [team_name]
 else:
-    env, agents = make_env.make_env_agents(agentnames = agentnames, project_part = project_part
-    , first_file = 'data/datafile1.csv', second_file='data/datafile2.csv')
+    agentnames = [team_name, 'dummy_fixed_prices_adaptive']
+env, agents = make_env.make_env_agents(
+    agentnames = agentnames, 
+    project_part = project_part, 
+    first_file = 'data/datafile1_2024.csv', 
+    second_file='data/datafile2_2024.csv'
+    )
 print('Successfully initialized environment and agents.')
 
 
-print('-------Testing agent by running 200 steps against dummy adaptive agent-------')
+print('-------Testing agent by running 200 steps-------')
 T = 200
-env.reset()
-customer_covariates, sale, profits = env.get_current_state_customer_to_send_agents()
-last_customer_covariates = customer_covariates
-cumulativetimes = [0 for _ in agents]
-n_errors = [0 for _ in agents]
 
+env.reset()
+customer_covariates, sale, profits, inventories, time_until_replenish = env.get_current_state_customer_to_send_agents()
+last_customer_covariates = customer_covariates
+
+fig, ax = plt.subplots(figsize=(20, 10))
 for t in range(0, T):
-    actions = []
-    for enoutside, agent in enumerate(agents):
-      ts = time.time()
-      action = agent.action((customer_covariates, sale, profits))
-      assert len(action) == project_part ## Have to give 1 price for each item. There is 1 item in part 1, 2 items in part 2
-      curtime = time.time()
-      if np.any(np.array(action) < 0):
-          n_errors[enoutside] += 1
-      cumulativetimes[enoutside] += curtime - ts
-      actions.append(action)
-    customer_covariates, sale, profits = env.step(actions)
+    actions = [agent.action((customer_covariates, sale, profits, inventories, time_until_replenish)) for agent in agents]
+    customer_covariates, sale, profits, inventories, time_until_replenish = env.step(actions)
     last_customer_covariates = customer_covariates
 
+plt.close()
+print("Cumulative profit: {}".format(env.agent_profits))
+print("Cumulative buyer utility: {}".format(env.cumulative_buyer_utility))
 
 print("Your Submission has passed!")
 print("Average per-customer runtime for your agent in seconds: {}".format(cumulativetimes[0]/T))
