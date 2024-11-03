@@ -59,10 +59,19 @@ T = 200
 env.reset()
 customer_covariates, sale, profits, inventories, time_until_replenish = env.get_current_state_customer_to_send_agents()
 last_customer_covariates = customer_covariates
+cumulativetimes = [0 for _ in agents]
+n_errors = [0 for _ in agents]
 
 fig, ax = plt.subplots(figsize=(20, 10))
 for t in range(0, T):
-    actions = [agent.action((customer_covariates, sale, profits, inventories, time_until_replenish)) for agent in agents]
+    actions = []
+    for id, agent in enumerate(agents):
+        start = time.time()
+        action = agent.action((customer_covariates, sale, profits, inventories, time_until_replenish))
+        cumulativetimes[id] += time.time() - start
+        if action < 0:
+            n_errors[id] += 1
+        actions.append(action)
     customer_covariates, sale, profits, inventories, time_until_replenish = env.step(actions)
     last_customer_covariates = customer_covariates
 
