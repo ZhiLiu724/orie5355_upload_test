@@ -28,12 +28,6 @@ if folders[0] != team_name:
 files = [f for f in os.listdir('./agents')]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
 
-
-pricesfilename = 'static_prices_submission.csv'
-assert f'{pricesfilename}' in files, "You have not submitted the static prices file"
-static_prices_df = pd.read_csv(f'./agents/{pricesfilename}')
-assert set(static_prices_df.columns) == set(['user_index', 'price_item', 'expected_revenue']), "Your submitted static prices file has wrong columns"
-print('Your static prices file is submitted and the columns are correct')
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
 
@@ -79,6 +73,15 @@ plt.close()
 print("Cumulative profit: {}".format(env.agent_profits))
 print("Cumulative buyer utility: {}".format(env.cumulative_buyer_utility))
 
-print("Your Submission has passed!")
 print("Average per-customer runtime for your agent in seconds: {}".format(cumulativetimes[0]/T))
 print("Number of rounds your agent output invalid prices: {}".format(n_errors[0]))
+
+
+pricesfilename = 'static_prices_submission.csv'
+assert f'{pricesfilename}' in files, "You have not submitted the static prices file"
+static_prices_df = pd.read_csv(f'./agents/{pricesfilename}')
+assert set(static_prices_df.columns) == set(['user_index', 'price_item', 'expected_revenue']), "Your submitted static prices file has wrong columns"
+print('Your static prices file is submitted and the columns are correct')
+
+print('-------ALL TESTS COMPLETED-------')
+print("Your Submission has passed!")
