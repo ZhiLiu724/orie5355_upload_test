@@ -28,12 +28,12 @@ if folders[0] != team_name:
 files = [f for f in os.listdir('./agents')]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
 
-# if part_name == 2:
-#     part2pricesfilename = 'part2_static_prices_submission.csv'
-#     assert f'{part2pricesfilename}' in files, "You have not submitted the static prices file"
-#     static_prices_df = pd.read_csv(f'./agents/{part2pricesfilename}')
-#     assert set(static_prices_df.columns) == set(['user_index', 'price_item_0', 'price_item_1', 'expected_revenue']), "Your submitted static prices file has wrong columns"
-#     print('Your static prices file is submitted and the columns are correct')
+
+pricesfilename = 'static_prices_submission.csv'
+assert f'{pricesfilename}' in files, "You have not submitted the static prices file"
+static_prices_df = pd.read_csv(f'./agents/{pricesfilename}')
+assert set(static_prices_df.columns) == set(['user_index', 'price_item', 'expected_revenue']), "Your submitted static prices file has wrong columns"
+print('Your static prices file is submitted and the columns are correct')
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
 
