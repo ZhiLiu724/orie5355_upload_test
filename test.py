@@ -32,7 +32,9 @@ assert f"{team_name}.py" in files, "You should have an agent file in the /agents
 files.remove(f"{team_name}.py")
 files = [f for f in files if f != 'static_prices_submission.csv']
 for f in files:
-    os.remove(os.path.join('./agents', f))
+    # only remove non-folder files
+    if os.path.isfile(os.path.join('./agents', f)):
+        os.remove(os.path.join('./agents', f))
 
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
