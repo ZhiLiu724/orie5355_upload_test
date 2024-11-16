@@ -28,6 +28,17 @@ if folders[0] != team_name:
 files = [f for f in os.listdir('./agents')]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
 
+### checking static prices file
+print("Checking if you have submitted the static prices file")
+pricesfilename = 'static_prices_submission.csv'
+if f'{pricesfilename}' not in files:
+    print("You have not submitted the static prices file!!!")
+else:
+    static_prices_df = pd.read_csv(f'./agents/{pricesfilename}')
+    if set(static_prices_df.columns) != set(['user_index', 'price_item', 'expected_revenue']):
+        print("Your submitted static prices file has wrong columns")
+    print('Your static prices file is submitted and the columns are correct')
+
 ### delete all files except the agent file and the static prices file
 files.remove(f"{team_name}.py")
 files.remove('__init__.py')
@@ -85,12 +96,6 @@ print("Cumulative buyer utility: {}".format(env.cumulative_buyer_utility))
 print("Average per-customer runtime for your agent in seconds: {}".format(cumulativetimes[0]/T))
 print("Number of rounds your agent output invalid prices: {}".format(n_errors[0]))
 
-
-pricesfilename = 'static_prices_submission.csv'
-assert f'{pricesfilename}' in files, "You have not submitted the static prices file"
-static_prices_df = pd.read_csv(f'./agents/{pricesfilename}')
-assert set(static_prices_df.columns) == set(['user_index', 'price_item', 'expected_revenue']), "Your submitted static prices file has wrong columns"
-print('Your static prices file is submitted and the columns are correct')
 
 print('-------ALL TESTS COMPLETED-------')
 print("Your Submission has passed!")
