@@ -28,6 +28,12 @@ if folders[0] != team_name:
 files = [f for f in os.listdir('./agents')]
 assert f"{team_name}.py" in files, "You should have an agent file in the /agents folder with your team's actual name" 
 
+### delete all files except the agent file and the static prices file
+files.remove(f"{team_name}.py")
+files = [f for f in files if f != 'static_prices_submission.csv']
+for f in files:
+    os.remove(os.path.join('./agents', f))
+
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
 
