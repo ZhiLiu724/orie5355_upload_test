@@ -30,6 +30,7 @@ assert f"{team_name}.py" in files, "You should have an agent file in the /agents
 
 ### delete all files except the agent file and the static prices file
 files.remove(f"{team_name}.py")
+files.remove('__init__.py')
 files = [f for f in files if f != 'static_prices_submission.csv']
 for f in files:
     # only remove non-folder files
