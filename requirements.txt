@@ -1,4 +1,4 @@
-## TODO UPDATE for 2023 with whatever is on colab
+## Updated 2024/11/17
 ## can call following in colab to get version numbers
 ### pip freeze > requirements.txt
 
