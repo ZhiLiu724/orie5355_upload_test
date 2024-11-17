@@ -2,13 +2,13 @@
 ## can call following in colab to get version numbers
 ### pip freeze > requirements.txt
 
-cryptography==41.0.5
+cryptography==43.0.0
 matplotlib==3.7.1
-numpy==1.23.5
+numpy==1.26.4
 pandas==1.5.3
-seaborn==0.12.2
-scikit-learn==1.2.2
-xgboost
-sympy==1.12
+seaborn==0.13.2
+scikit-learn==1.5.1
+xgboost==2.1.2
+sympy==1.13.2
 
-## python version: 3.7.12 
+## python version: 3.12.7
