@@ -39,14 +39,7 @@ else:
         print("Your submitted static prices file has wrong columns")
     print('Your static prices file is submitted and the columns are correct')
 
-### delete all files except the agent file and the static prices file
-files.remove(f"{team_name}.py")
-files.remove('__init__.py')
-files = [f for f in files if f != 'static_prices_submission.csv']
-for f in files:
-    # only remove non-folder files
-    if os.path.isfile(os.path.join('./agents', f)):
-        os.remove(os.path.join('./agents', f))
+
 
     
 print('Team name: {}, file structure correct, running test script'.format(team_name))
@@ -54,6 +47,19 @@ print('Team name: {}, file structure correct, running test script'.format(team_n
 
 print('-------Testing agent-------')
 project_part = part_name 
+
+### delete all files except the agent file and the static prices file
+### this makes sure students' code can be run without other supporting files
+
+files.remove(f"{team_name}.py")
+files.remove('__init__.py')
+files.remove('dummy_fixed_prices_adaptive.py')
+files.remove('static_prices_submission.csv')
+for f in files:
+    # only remove non-folder files
+    if os.path.isfile(os.path.join('./agents', f)):
+        os.remove(os.path.join('./agents', f))
+
 if project_part == 1:
     agentnames = [team_name]
 else:
