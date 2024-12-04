@@ -58,7 +58,7 @@ project_part = part_name
 files.remove(f"{team_name}.py")
 files.remove('__init__.py')
 files.remove('dummy_fixed_prices_adaptive.py')
-files.remove('static_prices_submission.csv')
+files = [f for f in files if f!='static_prices_submission.csv']
 for f in files:
     # only remove non-folder files
     if os.path.isfile(os.path.join('./agents', f)):
