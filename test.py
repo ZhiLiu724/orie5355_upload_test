@@ -14,6 +14,8 @@ repo_name = os.path.basename(os.path.dirname(os.path.dirname(current_script_path
 part_and_team_name = repo_name.split('part-')[1]
 part_name = int(part_and_team_name.split('-', 1)[0])
 team_name = part_and_team_name.split('-', 1)[1]
+if 'new-' in team_name:
+    team_name = team_name.split('new-')[1]
 print('Your team name according to the repository name should be: ', team_name)
 print('This is submission for project part: ', part_name)
 
